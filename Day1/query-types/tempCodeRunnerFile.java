@@ -14,7 +14,6 @@ public class Main {
     static int[] arr;
 
     public static void processQuery(Query q) {
-        // Validation
         if (q.l < 0 || q.r >= arr.length || q.l > q.r) {
             throw new IllegalArgumentException("Invalid query range");
         }
@@ -26,12 +25,8 @@ public class Main {
         } else {
             throw new IllegalArgumentException("Unknown query type");
         }
-
-        // Debug: print array after every query
-        System.out.println("Array now: " + Arrays.toString(arr));
     }
 
-    // Type 1: Update
     private static void query1(Query q) {
         int base = arr[q.l];
         for (int i = q.l; i <= q.r; i++) {
@@ -39,7 +34,6 @@ public class Main {
         }
     }
 
-    // Type 2: Sum
     private static int query2(Query q) {
         int sum = 0;
         for (int i = q.l; i <= q.r; i++) {
@@ -65,15 +59,11 @@ public class Main {
 
         System.out.println("Enter queries in format: type l r");
         System.out.println("Type 1: update, Type 2: sum query");
-        System.out.println("(Use 1-based indexing for input)");
 
         while (q-- > 0) {
             int type = sc.nextInt();
-
-            // FIX: Convert 1-based → 0-based
-            int l = sc.nextInt() - 1;
-            int r = sc.nextInt() - 1;
-
+            int l = sc.nextInt();
+            int r = sc.nextInt();
             processQuery(new Query(type, l, r));
         }
 
